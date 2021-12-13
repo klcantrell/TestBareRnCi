@@ -3,10 +3,10 @@ name: Android
 on:
   push:
     branches:
-      - main
+    - main
   pull_request:
     branches:
-      - main
+    - main
   workflow_dispatch:
 
 jobs:
@@ -18,6 +18,12 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: 16
-        cache: 'npm'
-    - run: npm install
+    - name: Cache npm dependencies
+      uses: actions/cache@v2
+      with:
+        path: '~/.npm'
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    - run: npm ci
     - run: npm test
