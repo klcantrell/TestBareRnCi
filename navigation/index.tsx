@@ -51,6 +51,7 @@ function RootNavigator() {
         component={NfcWriteScreen}
         options={{
           title: 'Write NFC',
+          tabBarAccessibilityLabel: 'WriteNfc tab',
         }}
       />
       <BottomTab.Screen
@@ -58,6 +59,7 @@ function RootNavigator() {
         component={QrReadScreen}
         options={{
           title: 'Read QR code',
+          tabBarAccessibilityLabel: 'ReadQr tab',
         }}
       />
       <BottomTab.Screen
@@ -65,6 +67,7 @@ function RootNavigator() {
         component={StackedFormScreenNavigator}
         options={{
           title: 'Fill out form',
+          tabBarAccessibilityLabel: 'StackedFormScreen tab',
         }}
       />
     </BottomTab.Navigator>
