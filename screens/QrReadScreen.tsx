@@ -1,14 +1,45 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
+import { ActivityIndicator, StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
+import { useAppDispatch } from '../state/store';
+import { fetchTodos, LoadingStatus, useTodos } from '../state/todoSlice';
 import { RootTabScreenProps } from '../types';
 
 export default function QrReadScreen(_props: RootTabScreenProps<'ReadQr'>) {
-  return (
+  const todos = useTodos();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (todos.loadingStatus === LoadingStatus.Uninitialized) {
+      dispatch(fetchTodos());
+    }
+  }, [todos.data, todos.loadingStatus, dispatch]);
+
+  if (todos.loadingStatus === LoadingStatus.Loading) {
     <View style={styles.container}>
-      <Text>HI HI HI</Text>
-    </View>
-  );
+      <ActivityIndicator />
+    </View>;
+  }
+
+  if (todos.loadingStatus === LoadingStatus.Loaded && todos.data !== null) {
+    return (
+      <View>
+        {todos.data.map((todo) => (
+          <Text key={todo.id}>{todo.title}</Text>
+        ))}
+      </View>
+    );
+  }
+
+  if (todos.loadingStatus === LoadingStatus.Error) {
+    return (
+      <View style={styles.container}>
+        <Text>Something went wrong fetching todos</Text>
+      </View>
+    );
+  }
+
+  return <View style={styles.container} />;
 }
 
 const styles = StyleSheet.create({
