@@ -1,5 +1,10 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppDispatch, useAppSelector } from './store';
+import {
+  AnyAction,
+  createSlice,
+  PayloadAction,
+  ThunkAction,
+} from '@reduxjs/toolkit';
+import { RootState, useAppSelector } from './store';
 
 export enum LoadingStatus {
   Uninitialized,
@@ -39,14 +44,29 @@ export const todoSlice = createSlice({
 });
 
 export const { updateLoadingStatus, updateData } = todoSlice.actions;
-export const fetchTodos = () => async (dispatch: AppDispatch) => {
-  dispatch(updateLoadingStatus(LoadingStatus.Loading));
-  const response = await fetch(
-    'https://jsonplaceholder.typicode.com/todos?_start=1&_end=10'
-  );
-  const data = (await response.json()) as Array<Todo>;
-  dispatch(updateLoadingStatus(LoadingStatus.Loaded));
-  dispatch(updateData(data));
+
+export const fetchTodos: () => ThunkAction<
+  void,
+  RootState,
+  unknown,
+  AnyAction
+> = () => async (dispatch, getState) => {
+  const {
+    todo: { loadingStatus },
+  } = getState();
+  if (
+    loadingStatus === LoadingStatus.Uninitialized ||
+    loadingStatus === LoadingStatus.Loaded ||
+    loadingStatus === LoadingStatus.Error
+  ) {
+    dispatch(updateLoadingStatus(LoadingStatus.Loading));
+    const response = await fetch(
+      'https://jsonplaceholder.typicode.com/todos?_start=1&_end=10'
+    );
+    const data = (await response.json()) as Array<Todo>;
+    dispatch(updateData(data));
+    dispatch(updateLoadingStatus(LoadingStatus.Loaded));
+  }
 };
 
 export const useTodos = () => useAppSelector((state) => state.todo);
