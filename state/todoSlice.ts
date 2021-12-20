@@ -40,12 +40,10 @@ export const todoSlice = createSlice({
 
 const { updateLoadingStatus, updateData } = todoSlice.actions;
 
-type CreateFetchTodosActionWithCacheType = (
+const fetchTodosWithCache: (
   realm: RealmInstance
-) => () => ThunkAction<void, RootState, unknown, AnyAction>;
-
-const createFetchTodosActionWithCache: CreateFetchTodosActionWithCacheType =
-  (realm: RealmInstance) => () => async (dispatch, getState) => {
+) => ThunkAction<void, RootState, unknown, AnyAction> =
+  (realm: RealmInstance) => async (dispatch, getState) => {
     if (realm.status === RealmStatus.Initialized) {
       console.log(realm.instance.path);
     }
@@ -74,9 +72,14 @@ interface UseTodos extends TodoState {
 export const useTodos: () => UseTodos = () => {
   const todos = useAppSelector((state) => state.todo);
   const realm = useRealm();
+
+  function fetchTodos() {
+    return fetchTodosWithCache(realm);
+  }
+
   return {
     ...todos,
-    fetchTodos: createFetchTodosActionWithCache(realm),
+    fetchTodos,
   };
 };
 
