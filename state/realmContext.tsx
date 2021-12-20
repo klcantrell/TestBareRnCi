@@ -23,7 +23,7 @@ type RealmFailedToInitialize = {
   instance: null;
 };
 
-type RealmInstance =
+export type RealmInstance =
   | RealmUnitialized
   | RealmInitialized
   | RealmFailedToInitialize;
