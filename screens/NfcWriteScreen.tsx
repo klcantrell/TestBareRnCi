@@ -3,7 +3,7 @@ import { Button, TextInput, StyleSheet, Platform } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import { NfcStatus } from '../models';
-import { initializeNfcManager, writeTag } from '../nfcManager';
+import nfcManager from '../nfcManager';
 import NfcPromptAndroid from '../components/AndroidPrompt';
 import useColorScheme from '../hooks/useColorScheme';
 import { Header } from 'react-native/Libraries/NewAppScreen';
@@ -19,7 +19,7 @@ export default function NfcWriteScreen(_props: RootTabScreenProps<'WriteNfc'>) {
   useEffect(() => {
     async function initializeNfc() {
       try {
-        const nfcManagerInitialized = await initializeNfcManager();
+        const nfcManagerInitialized = await nfcManager.initialize();
         if (nfcManagerInitialized) {
           setNfcStatus(NfcStatus.Initialized);
         } else {
@@ -54,7 +54,7 @@ export default function NfcWriteScreen(_props: RootTabScreenProps<'WriteNfc'>) {
             if (Platform.OS === 'android') {
               setScanningForTag(true);
             }
-            const writeResult = await writeTag(messageToWrite);
+            const writeResult = await nfcManager.writeTag(messageToWrite);
             if (Platform.OS === 'android') {
               setScanningForTag(false);
             }

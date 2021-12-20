@@ -9,7 +9,7 @@ import NfcManager, {
 
 let nfcManagerInitialized = false;
 
-export async function initializeNfcManager(): Promise<boolean> {
+async function initialize(): Promise<boolean> {
   if (!nfcManagerInitialized) {
     const isSupported = await NfcManager.isSupported();
     if (isSupported) {
@@ -20,7 +20,7 @@ export async function initializeNfcManager(): Promise<boolean> {
   return nfcManagerInitialized;
 }
 
-export function readTag(): Promise<string> {
+function readTag(): Promise<string> {
   const cleanUp = () => {
     NfcManager.setEventListener(NfcEvents.DiscoverTag, null);
     NfcManager.setEventListener(NfcEvents.SessionClosed, null);
@@ -52,7 +52,7 @@ export function readTag(): Promise<string> {
   });
 }
 
-export async function writeTag(value: string) {
+async function writeTag(value: string) {
   const successMessage = 'Successfully wrote to tag!';
   const failureMessage = 'Writing to tag failed';
 
@@ -90,6 +90,13 @@ export async function writeTag(value: string) {
   }
 }
 
-export async function getBackgroundTag() {
+async function getBackgroundTag() {
   return NfcManager.getBackgroundTag();
 }
+
+export default {
+  initialize,
+  writeTag,
+  readTag,
+  getBackgroundTag,
+};

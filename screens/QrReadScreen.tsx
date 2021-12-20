@@ -13,7 +13,11 @@ export default function QrReadScreen(_props: RootTabScreenProps<'ReadQr'>) {
     </View>;
   }
 
-  if (loadingStatus === LoadingStatus.Loaded && data !== null) {
+  if (
+    loadingStatus === LoadingStatus.Loaded &&
+    data !== null &&
+    data.length > 0
+  ) {
     return (
       <View>
         {data.map((todo) => (
@@ -31,7 +35,11 @@ export default function QrReadScreen(_props: RootTabScreenProps<'ReadQr'>) {
     );
   }
 
-  return <View style={styles.container} />;
+  return (
+    <View style={styles.container}>
+      <Text>You have no todos</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

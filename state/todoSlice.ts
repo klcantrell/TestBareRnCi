@@ -10,6 +10,7 @@ import { RootState, useAppDispatch, useAppSelector } from './store';
 import { Todo } from '../types';
 import { RealmInstance, RealmStatus, useRealm } from './realmContext';
 import { TodoEntity } from '../state/realmSchema';
+import api from '../api';
 
 export enum LoadingStatus {
   Uninitialized,
@@ -56,18 +57,41 @@ const fetchTodosWithCache: (
       loadingStatus === LoadingStatus.Error
     ) {
       if (realm.status === RealmStatus.Initialized) {
-        const cachedTodos = realm.instance.objects(TodoEntity);
+        const cachedTodos = realm.instance.objects<TodoEntity>(
+          TodoEntity.schema.name
+        );
         if (cachedTodos.length === 0) {
-          console.log('CACHE IS EMPTY');
+          dispatch(updateLoadingStatus(LoadingStatus.Loading));
+          const todos = await api.getTodos();
+          dispatch(updateData(todos));
+          dispatch(updateLoadingStatus(LoadingStatus.Loaded));
+          const randomTodo = todos[Math.floor(Math.random() * todos.length)];
+          console.log(`Caching todo with title ${randomTodo.title}`);
+          realm.instance.write(() => {
+            realm.instance.create<TodoEntity>(TodoEntity.schema.name, {
+              _id: randomTodo.id,
+              userId: randomTodo.userId,
+              title: randomTodo.title,
+              completed: randomTodo.completed,
+            });
+          });
+        } else {
+          dispatch(updateLoadingStatus(LoadingStatus.Loading));
+          const todos: Array<Todo> = cachedTodos.map((c) => ({
+            id: c._id,
+            userId: c.userId,
+            title: c.title,
+            completed: c.completed,
+          }));
+          dispatch(updateData(todos));
+          dispatch(updateLoadingStatus(LoadingStatus.Loaded));
         }
+      } else {
+        dispatch(updateLoadingStatus(LoadingStatus.Loading));
+        const todos = await api.getTodos();
+        dispatch(updateData(todos));
+        dispatch(updateLoadingStatus(LoadingStatus.Loaded));
       }
-      dispatch(updateLoadingStatus(LoadingStatus.Loading));
-      const response = await fetch(
-        'https://jsonplaceholder.typicode.com/todos?_start=1&_end=10'
-      );
-      const data = (await response.json()) as Array<Todo>;
-      dispatch(updateData(data));
-      dispatch(updateLoadingStatus(LoadingStatus.Loaded));
     }
   };
 
