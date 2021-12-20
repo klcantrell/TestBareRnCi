@@ -5,19 +5,13 @@ import {
   ThunkAction,
 } from '@reduxjs/toolkit';
 import { RootState, useAppSelector } from './store';
+import { Todo } from '../types';
 
 export enum LoadingStatus {
   Uninitialized,
   Loading,
   Loaded,
   Error,
-}
-
-interface Todo {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
 }
 
 interface TodoState {

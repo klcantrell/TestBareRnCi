@@ -32,3 +32,13 @@ export type FormScreenProps<Screen extends keyof FormScreenStackParamList> =
     NativeStackScreenProps<FormScreenStackParamList, Screen>,
     BottomTabScreenProps<RootTabParamList, 'StackedFormScreen'>
   >;
+
+export interface BaseTodo {
+  userId: number;
+  title: string;
+  completed: boolean;
+}
+
+export interface Todo extends BaseTodo {
+  id: number;
+}
