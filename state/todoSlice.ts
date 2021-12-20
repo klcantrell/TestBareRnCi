@@ -1,12 +1,15 @@
+import { useCallback, useEffect } from 'react';
 import {
   AnyAction,
   createSlice,
   PayloadAction,
   ThunkAction,
 } from '@reduxjs/toolkit';
-import { RootState, useAppSelector } from './store';
+
+import { RootState, useAppDispatch, useAppSelector } from './store';
 import { Todo } from '../types';
 import { RealmInstance, RealmStatus, useRealm } from './realmContext';
+import { TodoEntity } from '../state/realmSchema';
 
 export enum LoadingStatus {
   Uninitialized,
@@ -44,9 +47,6 @@ const fetchTodosWithCache: (
   realm: RealmInstance
 ) => ThunkAction<void, RootState, unknown, AnyAction> =
   (realm: RealmInstance) => async (dispatch, getState) => {
-    if (realm.status === RealmStatus.Initialized) {
-      console.log(realm.instance.path);
-    }
     const {
       todo: { loadingStatus },
     } = getState();
@@ -55,6 +55,12 @@ const fetchTodosWithCache: (
       loadingStatus === LoadingStatus.Loaded ||
       loadingStatus === LoadingStatus.Error
     ) {
+      if (realm.status === RealmStatus.Initialized) {
+        const cachedTodos = realm.instance.objects(TodoEntity);
+        if (cachedTodos.length === 0) {
+          console.log('CACHE IS EMPTY');
+        }
+      }
       dispatch(updateLoadingStatus(LoadingStatus.Loading));
       const response = await fetch(
         'https://jsonplaceholder.typicode.com/todos?_start=1&_end=10'
@@ -66,20 +72,26 @@ const fetchTodosWithCache: (
   };
 
 interface UseTodos extends TodoState {
-  fetchTodos: () => ThunkAction<void, RootState, unknown, AnyAction>;
+  retriggerFetchTodos: () => void;
 }
 
 export const useTodos: () => UseTodos = () => {
   const todos = useAppSelector((state) => state.todo);
   const realm = useRealm();
+  const dispatch = useAppDispatch();
 
-  function fetchTodos() {
-    return fetchTodosWithCache(realm);
-  }
+  useEffect(() => {
+    dispatch(fetchTodosWithCache(realm));
+  }, [dispatch, realm]);
+
+  const retriggerFetchTodos = useCallback(
+    () => dispatch(fetchTodosWithCache(realm)),
+    [realm, dispatch]
+  );
 
   return {
     ...todos,
-    fetchTodos,
+    retriggerFetchTodos,
   };
 };
 

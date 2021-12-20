@@ -1,19 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ActivityIndicator, StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
-import { useAppDispatch } from '../state/store';
 import { LoadingStatus, useTodos } from '../state/todoSlice';
 import { RootTabScreenProps } from '../types';
 
 export default function QrReadScreen(_props: RootTabScreenProps<'ReadQr'>) {
-  const { data, loadingStatus, fetchTodos } = useTodos();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (loadingStatus === LoadingStatus.Uninitialized) {
-      dispatch(fetchTodos());
-    }
-  }, [data, loadingStatus, fetchTodos, dispatch]);
+  const { data, loadingStatus } = useTodos();
 
   if (loadingStatus === LoadingStatus.Loading) {
     <View style={styles.container}>
