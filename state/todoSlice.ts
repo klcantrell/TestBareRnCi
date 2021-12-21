@@ -95,18 +95,38 @@ const fetchTodosWithCache: (
     }
   };
 
-interface UseTodos extends TodoState {
+interface UseTodos {
+  initiallyLoading: boolean;
+  syncingWithDataSource: boolean;
+  failed: boolean;
+  data: Array<Todo> | null;
   retriggerFetchTodos: () => void;
+  clearCache: () => void;
 }
 
 export const useTodos: () => UseTodos = () => {
   const todos = useAppSelector((state) => state.todo);
   const realm = useRealm();
   const dispatch = useAppDispatch();
+  const initiallyLoading =
+    todos.loadingStatus === LoadingStatus.Loading && todos.data === null;
+  const syncingWithDataSource =
+    todos.loadingStatus === LoadingStatus.Loading && todos.data !== null;
 
   useEffect(() => {
     dispatch(fetchTodosWithCache(realm));
   }, [dispatch, realm]);
+
+  const clearCache = useCallback(() => {
+    if (realm.status === RealmStatus.Initialized) {
+      const cachedTodos = realm.instance.objects<TodoEntity>(
+        TodoEntity.schema.name
+      );
+      realm.instance.write(() => {
+        realm.instance.delete(cachedTodos);
+      });
+    }
+  }, [realm]);
 
   const retriggerFetchTodos = useCallback(
     () => dispatch(fetchTodosWithCache(realm)),
@@ -114,7 +134,11 @@ export const useTodos: () => UseTodos = () => {
   );
 
   return {
-    ...todos,
+    initiallyLoading,
+    syncingWithDataSource,
+    failed: todos.loadingStatus === LoadingStatus.Error,
+    data: todos.data,
+    clearCache,
     retriggerFetchTodos,
   };
 };

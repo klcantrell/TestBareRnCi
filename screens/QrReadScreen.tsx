@@ -1,33 +1,39 @@
 import React from 'react';
-import { ActivityIndicator, StyleSheet } from 'react-native';
+import { ActivityIndicator, Button, StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
-import { LoadingStatus, useTodos } from '../state/todoSlice';
+import { useTodos } from '../state/todoSlice';
 import { RootTabScreenProps } from '../types';
 
 export default function QrReadScreen(_props: RootTabScreenProps<'ReadQr'>) {
-  const { data, loadingStatus } = useTodos();
+  const {
+    data,
+    initiallyLoading,
+    syncingWithDataSource,
+    failed,
+    retriggerFetchTodos,
+    clearCache,
+  } = useTodos();
 
-  if (loadingStatus === LoadingStatus.Loading) {
+  if (initiallyLoading) {
     <View style={styles.container}>
       <ActivityIndicator />
     </View>;
   }
 
-  if (
-    loadingStatus === LoadingStatus.Loaded &&
-    data !== null &&
-    data.length > 0
-  ) {
+  if (data !== null && data.length > 0) {
     return (
       <View>
+        {syncingWithDataSource && <ActivityIndicator />}
         {data.map((todo) => (
           <Text key={todo.id}>{todo.title}</Text>
         ))}
+        <Button title="Sync" onPress={retriggerFetchTodos} />
+        <Button title="Clear cache" onPress={clearCache} />
       </View>
     );
   }
 
-  if (loadingStatus === LoadingStatus.Error) {
+  if (failed) {
     return (
       <View style={styles.container}>
         <Text>Something went wrong fetching todos</Text>
