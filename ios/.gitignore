@@ -13,3 +13,4 @@ fastlane/test_output
 # fastlane builds
 builds/*
 *.xcarchive
+*.dSYM.zip
