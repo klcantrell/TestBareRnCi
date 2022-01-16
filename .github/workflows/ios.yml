@@ -1,12 +1,6 @@
 name: iOS
 
 on:
-  push:
-    branches:
-    - main
-  pull_request:
-    branches:
-    - main
   workflow_dispatch:
 
 jobs:
@@ -18,6 +12,12 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: 16
+    - name: Set up ruby env
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.1.0
+        working-directory: ./ios
+        bundler-cache: true
     - name: Cache npm dependencies
       uses: actions/cache@v2
       with:
@@ -25,3 +25,22 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
     - run: npm ci
     - run: npm test
+    - name: Import signing certificate
+      env:
+        IOS_DIST_SIGNING_KEY: ${{ secrets.IOS_DIST_SIGNING_KEY }}
+        IOS_DIST_SIGNING_KEY_PASSWORD: ${{ secrets.IOS_DIST_SIGNING_KEY_PASSWORD }}
+      run: |
+        exec .github/scripts/import-certificate.sh
+    - name: Import provisioning profile
+      env:
+        PROVISIONING_PROFILE_DATA: ${{ secrets.PROVISIONING_PROFILE_DATA }}
+      run: |
+        exec .github/scripts/import-profile.sh
+    - name: Upload app to Test Flight
+      env:
+        ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+        ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+        ASC_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+      working-directory: ./ios
+      run: |
+        bundle exec fastlane beta
