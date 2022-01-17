@@ -1,4 +1,4 @@
-package com.testbarernci;
+package com.kal.testbarernci;
 
 import com.facebook.react.ReactActivity;
 
