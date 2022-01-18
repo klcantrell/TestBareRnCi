@@ -31,7 +31,7 @@ platform :ios do
     commit_version_bump(
       xcodeproj: "TestBareRnCi.xcodeproj",
       force: true,
-      message: "Version bump"
+      message: "iOS version bump"
     )
     push_to_git_remote
   end
