@@ -12,10 +12,52 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: 16
+    - name: Set up ruby env
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.1.0
+        working-directory: ./ios
+        bundler-cache: true
+    - name: Cache Gradle
+      uses: actions/cache@v2
+      id: gradlecache
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
     - name: Cache npm dependencies
       uses: actions/cache@v2
+      id: npmcache
       with:
         path: '~/.npm'
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
     - run: npm ci
     - run: npm test
+    - name: Import keystore
+      working-directory: ./android
+      env:
+        KEYSTORE_DATA: ${{ secrets.KEYSTORE_DATA }}
+      run: |
+        exec .github/scripts/import-keystore.sh
+    - name: Import Play credentials
+      working-directory: ./android
+      env:
+        PLAY_CREDENTIALS: ${{ secrets.PLAY_CREDENTIALS }}
+      run: |
+        exec .github/scripts/import-play-credentials.sh
+    - name: Configure Keystore
+      working-directory: ./android
+      run: |
+        echo "KEYSTORE_FILE=testbarernci.keystore" >> keystore.properties
+        echo "KEYSTORE_KEY_ALIAS=$KEYSTORE_KEY_ALIAS" >> keystore.properties
+        echo "KEYSTORE_KEY_PASSWORD=$KEYSTORE_KEY_PASSWORD" >> keystore.properties
+        echo "KEYSTORE_STORE_PASSWORD=$KEYSTORE_STORE_PASSWORD" >> keystore.properties
+      env:
+        KEYSTORE_KEY_ALIAS: ${{ secrets.KEYSTORE_KEY_ALIAS }}
+        KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD }}
+        KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD }}
+    - name: Upload app to Google Play
+      working-directory: ./android
+      run: |
+        bundle exec fastlane deploy_internal
