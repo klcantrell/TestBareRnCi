@@ -35,13 +35,11 @@ jobs:
     - run: npm ci
     - run: npm test
     - name: Import keystore
-      working-directory: ./android
       env:
         KEYSTORE_DATA: ${{ secrets.KEYSTORE_DATA }}
       run: |
         exec .github/scripts/import-keystore.sh
     - name: Import Play credentials
-      working-directory: ./android
       env:
         PLAY_CREDENTIALS: ${{ secrets.PLAY_CREDENTIALS }}
       run: |

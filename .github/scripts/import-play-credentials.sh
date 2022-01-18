@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-echo "$PLAY_CREDENTIALS" | base64 --decode > play-store-credentials.json
+echo "$PLAY_CREDENTIALS" | base64 --decode > android/play-store-credentials.json
