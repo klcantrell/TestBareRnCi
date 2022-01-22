@@ -1,13 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: 'com.google.gms.google-services'
 
-project.ext.envConfigFiles = [
-    development: ".env.development",
-    production: ".env.production",
-]
-
-apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
-
 import com.android.build.OutputFile
 
 /**
@@ -143,11 +136,11 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
+        applicationId "com.kal.testbarernci"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 7
+        versionCode 8
         versionName "1.0"
-        resValue "string", "build_config_package", "com.kal.testbarernci"
     }
     splits {
         abi {
