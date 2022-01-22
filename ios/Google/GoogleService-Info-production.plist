@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1057966313092-mnir97bv69ffmglo97ul392591tma2ib.apps.googleusercontent.com</string>
+	<string>1057966313092-00o7debvrviush3vvp4dkm0k93l8hlrt.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1057966313092-mnir97bv69ffmglo97ul392591tma2ib</string>
+	<string>com.googleusercontent.apps.1057966313092-00o7debvrviush3vvp4dkm0k93l8hlrt</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1057966313092-n2v9b9i33dnbjeu2uvc2kijg16eipo4i.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDWAHXZ-RQsb3iIG4p71-VNVJTywmacwR8</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.reactjs.native.example.TestBareRnCi</string>
+	<string>com.kal.TestBareRnCi</string>
 	<key>PROJECT_ID</key>
 	<string>playwithdynamiclinks</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1057966313092:ios:c9c891ce1442d93e5d3cd1</string>
+	<string>1:1057966313092:ios:24bb6ea779511c875d3cd1</string>
 </dict>
 </plist>
