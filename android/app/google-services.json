@@ -1,0 +1,129 @@
+{
+  "project_info": {
+    "project_number": "1057966313092",
+    "project_id": "playwithdynamiclinks",
+    "storage_bucket": "playwithdynamiclinks.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057966313092:android:ad7fe8690cff21205d3cd1",
+        "android_client_info": {
+          "package_name": "com.kal.testbarernci"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057966313092-f23hjdrmj89d81hfb81frfl72hd30k72.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMN4e-vKQ2oonYYtl8kCi0nnORs_ltdXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057966313092-f23hjdrmj89d81hfb81frfl72hd30k72.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1057966313092-09ghjbrq5cdvl7658n6itkk2pgfrlo3h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.TestBareRnCi",
+                "app_store_id": "1110145109"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057966313092:android:d68fac0ec9a4e9425d3cd1",
+        "android_client_info": {
+          "package_name": "com.kal.testbarernci.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057966313092-f23hjdrmj89d81hfb81frfl72hd30k72.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMN4e-vKQ2oonYYtl8kCi0nnORs_ltdXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057966313092-f23hjdrmj89d81hfb81frfl72hd30k72.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1057966313092-09ghjbrq5cdvl7658n6itkk2pgfrlo3h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.TestBareRnCi",
+                "app_store_id": "1110145109"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1057966313092:android:85ad02c8974583165d3cd1",
+        "android_client_info": {
+          "package_name": "com.pelicanmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1057966313092-p4fs28v0dkcm9egdh50ef9jkerqtkhva.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pelicanmobile",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1057966313092-f23hjdrmj89d81hfb81frfl72hd30k72.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMN4e-vKQ2oonYYtl8kCi0nnORs_ltdXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1057966313092-f23hjdrmj89d81hfb81frfl72hd30k72.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1057966313092-09ghjbrq5cdvl7658n6itkk2pgfrlo3h.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.TestBareRnCi",
+                "app_store_id": "1110145109"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

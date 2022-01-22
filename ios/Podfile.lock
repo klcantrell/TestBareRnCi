@@ -454,34 +454,6 @@ PODS:
     - RNFBApp
   - RNGestureHandler (2.1.0):
     - React-Core
-  - RNReanimated (2.3.0):
-    - DoubleConversion
-    - FBLazyVector
-    - FBReactNativeSpec
-    - glog
-    - RCT-Folly
-    - RCTRequired
-    - RCTTypeSafety
-    - React
-    - React-callinvoker
-    - React-Core
-    - React-Core/DevSupport
-    - React-Core/RCTWebSocket
-    - React-CoreModules
-    - React-cxxreact
-    - React-jsi
-    - React-jsiexecutor
-    - React-jsinspector
-    - React-RCTActionSheet
-    - React-RCTAnimation
-    - React-RCTBlob
-    - React-RCTImage
-    - React-RCTLinking
-    - React-RCTNetwork
-    - React-RCTSettings
-    - React-RCTText
-    - ReactCommon/turbomodule/core
-    - Yoga
   - RNScreens (3.10.1):
     - React-Core
     - React-RCTImage
@@ -549,7 +521,6 @@ DEPENDENCIES:
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBDynamicLinks (from `../node_modules/@react-native-firebase/dynamic-links`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
-  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -655,8 +626,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/dynamic-links"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
-  RNReanimated:
-    :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   Yoga:
@@ -724,11 +693,10 @@ SPEC CHECKSUMS:
   RNFBApp: 1d553b3f201e9aaeba03d777b1dea51eaacc24cc
   RNFBDynamicLinks: 1033d685b3fffd20ca1c2f5e48cf76d18bce1bf4
   RNGestureHandler: e5c7cab5f214503dcefd6b2b0cefb050e1f51c4a
-  RNReanimated: 569c269480a76e39196aa17a5df08ef1561db5ff
   RNScreens: 522705f2e5c9d27efb17f24aceb2bf8335bc7b8e
   Yoga: 32a18c0e845e185f4a2a66ec76e1fd1f958f22fa
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 1763a6b8ab45eb4e0643b178b00b8afea1182a7e
+PODFILE CHECKSUM: 1b91d6c3e122474f8f3d26dd9aecedb2ccb187c7
 
 COCOAPODS: 1.11.2

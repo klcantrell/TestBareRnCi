@@ -9,6 +9,6 @@ describe('Example', () => {
 
   it('should navigate to the Read QR screen when user presses tab', async () => {
     await element(by.label('ReadQr tab')).tap();
-    await expect(element(by.text('HI HI HI'))).toBeVisible();
+    await expect(element(by.text('Clear cache'))).toBeVisible();
   });
 });
