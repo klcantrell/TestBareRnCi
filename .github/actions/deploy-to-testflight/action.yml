@@ -1,26 +1,56 @@
 name: 'Deploy to Test Flight'
 description: 'Build and sign iOS app then deploy to Test Flight'
+inputs:
+  IOS_DIST_SIGNING_KEY:
+    description: 'Signing certificate data for iOS'
+    required: true
+  IOS_DIST_SIGNING_KEY_PASSWORD:
+    description: 'Password for iOS signing certificate'
+    required: true
+  PROVISIONING_PROFILE_DATA:
+    description: 'Provisioning profile data for iOS'
+    required: true
+  ASC_APPLE_ID:
+    description: 'Apple Store Connect generated Apple ID'
+    required: true
+  ASC_KEY_ID:
+    description: 'Apple Store Connect API key ID'
+    required: false
+    default: 'ASC_KEY_ID'
+  ASC_ISSUER_ID:
+    description: 'Apple Store Connect API issuer ID'
+    required: false
+    default: 'ASC_ISSUER_ID'
+  ASC_PRIVATE_KEY:
+    description: 'Apple Store Connect API private key'
+    required: false
+    default: 'ASC_PRIVATE_KEY'
+  APPLE_APP_SPECIFIC_PASSWORD:
+    description: 'App specific password for deployment'
+    required: true
 runs:
   using: "composite"
   steps:
     - name: Import signing certificate
+      shell: bash
       env:
-        IOS_DIST_SIGNING_KEY: ${{ secrets.IOS_DIST_SIGNING_KEY }}
-        IOS_DIST_SIGNING_KEY_PASSWORD: ${{ secrets.IOS_DIST_SIGNING_KEY_PASSWORD }}
+        IOS_DIST_SIGNING_KEY: ${{ inputs.IOS_DIST_SIGNING_KEY }}
+        IOS_DIST_SIGNING_KEY_PASSWORD: ${{ inputs.IOS_DIST_SIGNING_KEY_PASSWORD }}
       run: |
         exec .github/scripts/import-certificate.sh
     - name: Import provisioning profile
+      shell: bash
       env:
-        PROVISIONING_PROFILE_DATA: ${{ secrets.PROVISIONING_PROFILE_DATA }}
+        PROVISIONING_PROFILE_DATA: ${{ inputs.PROVISIONING_PROFILE_DATA }}
       run: |
         exec .github/scripts/import-profile.sh
     - name: Upload app to Test Flight
       env:
-        ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
-        ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
-        ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
-        ASC_APPLE_ID: ${{ secrets.ASC_APPLE_ID }}
-        FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+        ASC_KEY_ID: ${{ inputs.ASC_KEY_ID }}
+        ASC_ISSUER_ID: ${{ inputs.ASC_ISSUER_ID }}
+        ASC_PRIVATE_KEY: ${{ inputs.ASC_PRIVATE_KEY }}
+        ASC_APPLE_ID: ${{ inputs.ASC_APPLE_ID }}
+        FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ inputs.APPLE_APP_SPECIFIC_PASSWORD }}
       working-directory: ./ios
       run: |
         bundle exec fastlane beta
