@@ -51,6 +51,7 @@ runs:
       run: |
         exec .github/scripts/import-profile.sh
     - name: Upload app to Test Flight
+      shell: bash
       env:
         ASC_KEY_ID: ${{ inputs.ASC_KEY_ID }}
         ASC_ISSUER_ID: ${{ inputs.ASC_ISSUER_ID }}
