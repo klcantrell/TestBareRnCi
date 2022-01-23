@@ -33,6 +33,9 @@ platform :ios do
       force: true,
       message: "iOS version bump"
     )
-    push_to_git_remote
+    push_to_git_remote(
+      local_branch: 'main',
+      remote_branch: 'main'
+    )
   end
 end
