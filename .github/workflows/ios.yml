@@ -50,6 +50,7 @@ jobs:
         ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
         ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
         ASC_PRIVATE_KEY: ${{ secrets.ASC_PRIVATE_KEY }}
+        ASC_APPLE_ID: ${{ secrets.ASC_APPLE_ID }}
         FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
       working-directory: ./ios
       run: |
