@@ -44,4 +44,4 @@ jobs:
       run: cd ios && pod install && cd ..
     - name: Deploy to Test Flight
       if: startsWith(github.ref, 'refs/tags/v')
-      uses: ./github/actions/deploy-to-testflight
+      uses: ./.github/actions/deploy-to-testflight
