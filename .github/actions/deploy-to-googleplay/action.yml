@@ -1,0 +1,56 @@
+name: 'Deploy to Google Play'
+description: 'Build and deploy Android app to Test Flight'
+inputs:
+  KEYSTORE_DATA:
+    description: 'Keystore data containing upload key for Android'
+    required: true
+  PLAY_CREDENTIALS:
+    description: 'Goole Play credentials for upload'
+    required: true
+  KEYSTORE_KEY_ALIAS:
+    description: 'Key alias for upload key'
+    required: true
+  KEYSTORE_STORE_PASSWORD:
+    description: 'Password for accessing keystore'
+    required: true
+  KEYSTORE_KEY_PASSWORD:
+    description: 'Password for accessing upload key'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Set up ruby env
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.1.0
+        working-directory: ./android
+        bundler-cache: true
+    - name: Import keystore
+      shell: bash
+      env:
+        KEYSTORE_DATA: ${{ inputs.KEYSTORE_DATA }}
+      run: |
+        exec .github/scripts/import-keystore.sh
+    - name: Import Play credentials
+      shell: bash
+      env:
+        PLAY_CREDENTIALS: ${{ inputs.PLAY_CREDENTIALS }}
+      run: |
+        exec .github/scripts/import-play-credentials.sh
+    - name: Configure Keystore
+      shell: bash
+      working-directory: ./android
+      run: |
+        echo "KEYSTORE_FILE=testbarernci.keystore" >> keystore.properties
+        echo "KEYSTORE_KEY_ALIAS=$KEYSTORE_KEY_ALIAS" >> keystore.properties
+        echo "KEYSTORE_KEY_PASSWORD=$KEYSTORE_KEY_PASSWORD" >> keystore.properties
+        echo "KEYSTORE_STORE_PASSWORD=$KEYSTORE_STORE_PASSWORD" >> keystore.properties
+      env:
+        KEYSTORE_KEY_ALIAS: ${{ inputs.KEYSTORE_KEY_ALIAS }}
+        KEYSTORE_KEY_PASSWORD: ${{ inputs.KEYSTORE_KEY_PASSWORD }}
+        KEYSTORE_STORE_PASSWORD: ${{ inputs.KEYSTORE_STORE_PASSWORD }}
+    - name: Upload app to Google Play
+      shell: bash
+      working-directory: ./android
+      run: |
+        bundle exec fastlane deploy_internal
