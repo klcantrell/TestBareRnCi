@@ -16,6 +16,8 @@ jobs:
     runs-on: macos-11
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: main
     - name: Use Node.js 16
       uses: actions/setup-node@v2
       with:
