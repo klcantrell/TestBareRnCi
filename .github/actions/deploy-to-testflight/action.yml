@@ -3,14 +3,6 @@ description: 'Build and sign iOS app then deploy to Test Flight'
 runs:
   using: "composite"
   steps:
-    - name: Cache Pods
-      uses: actions/cache@v2
-      id: podcache
-      with:
-        path: ios/Pods
-        key: ${{ runner.os }}-pods-${{ hashFiles('**/Podfile.lock') }}
-    - name: Install Pods
-      run: cd ios && pod install && cd ..
     - name: Import signing certificate
       env:
         IOS_DIST_SIGNING_KEY: ${{ secrets.IOS_DIST_SIGNING_KEY }}
