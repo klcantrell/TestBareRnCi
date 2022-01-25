@@ -38,6 +38,7 @@ export default function NfcWriteScreen(_props: RootTabScreenProps<'WriteNfc'>) {
       <View style={styles.container}>
         <Text style={styles.statusText}>{getNfcStatusText(nfcStatus)}</Text>
         <View style={styles.formContainer}>
+          <Text style={styles.textInputLabel}>Hello, it's a hotfix!</Text>
           <Text style={styles.textInputLabel}>Message:</Text>
           <TextInput
             style={styles.textInput}
