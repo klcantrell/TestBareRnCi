@@ -534,7 +534,7 @@
 				CODE_SIGN_ENTITLEMENTS = TestBareRnCi/TestBareRnCi.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = BMJG6U6BC7;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TestBareRnCi/Info.plist;
@@ -565,7 +565,7 @@
 				CODE_SIGN_ENTITLEMENTS = TestBareRnCi/TestBareRnCi.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = BMJG6U6BC7;
 				INFOPLIST_FILE = TestBareRnCi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -785,7 +785,7 @@
 				CODE_SIGN_ENTITLEMENTS = TestBareRnCi/TestBareRnCi.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = BMJG6U6BC7;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TestBareRnCi/Info.plist;
@@ -902,7 +902,7 @@
 				CODE_SIGN_ENTITLEMENTS = TestBareRnCi/TestBareRnCi.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_TEAM = BMJG6U6BC7;
 				INFOPLIST_FILE = TestBareRnCi/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
