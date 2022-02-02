@@ -15,9 +15,18 @@ jobs:
   build:
     runs-on: macos-11
     steps:
+    - name: Set Checkout Ref
+      run: |
+        if [[ -n $RELEASE_REF ]]; then
+          echo "REF_TO_CHECKOUT=$RELEASE_REF" >> $GITHUB_ENV
+        else
+          echo "REF_TO_CHECKOUT=$GITHUB_REF" >> $GITHUB_ENV
+        fi
+      env:
+        RELEASE_REF: ${{ github.event.release.target_commitish }}
     - uses: actions/checkout@v2
       with:
-        ref: ${{ github.event.release.target_commitish }}
+        ref: ${{ env.REF_TO_CHECKOUT }}
     - name: Use Node.js 16
       uses: actions/setup-node@v2
       with:

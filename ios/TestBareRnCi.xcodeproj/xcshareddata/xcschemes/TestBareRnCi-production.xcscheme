@@ -5,12 +5,12 @@
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
-      <PostActions>
+      <PreActions>
          <ExecutionAction
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "cp &quot;${PROJECT_DIR}/Google/GoogleService-Info-production.plist&quot; &quot;${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist&quot;&#10;">
+               scriptText = "cp &quot;${PROJECT_DIR}/Google/GoogleService-Info-production.plist&quot; &quot;${PROJECT_DIR}/GoogleService-Info.plist&quot;&#10;">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
@@ -22,7 +22,7 @@
                </EnvironmentBuildable>
             </ActionContent>
          </ExecutionAction>
-      </PostActions>
+      </PreActions>
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"

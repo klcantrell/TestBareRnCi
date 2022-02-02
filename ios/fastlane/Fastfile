@@ -33,6 +33,12 @@ platform :ios do
       force: true,
       message: "iOS version bump"
     )
+    reset_git_repo(
+      force: true,
+      files: [
+        "./GoogleService-Info.plist"
+      ]
+    )
     git_pull(rebase: true)
     push_to_git_remote
   end

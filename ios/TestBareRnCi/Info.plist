@@ -24,6 +24,10 @@
 	<string>20</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow $(PRODUCT_NAME) to use the camera</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Allow $(PRODUCT_NAME) to use the microphone</string>
 	<key>NFCReaderUsageDescription</key>
 	<string>We need to use NFC</string>
 	<key>NSAppTransportSecurity</key>

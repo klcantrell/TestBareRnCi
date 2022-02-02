@@ -24,7 +24,9 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.10.1",
     "react-redux": "^7.2.6",
-    "realm": "^10.10.1"
+    "realm": "^10.10.1",
+    "expo": ">=44.0.0-0 <45.0.0",
+    "expo-barcode-scanner": "~11.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -61,5 +63,18 @@
     "setupFilesAfterEnv": [
       "<rootDir>/jest/setup.ts"
     ]
+  },
+  "expo": {
+    "autolinking": {
+      "exclude": [
+        "expo-application",
+        "expo-asset",
+        "expo-constants",
+        "expo-file-system",
+        "expo-font",
+        "expo-keep-awake",
+        "expo-error-recovery"
+      ]
+    }
   }
 }
