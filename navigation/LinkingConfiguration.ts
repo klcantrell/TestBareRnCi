@@ -4,29 +4,30 @@
  * https://reactnavigation.org/docs/configuring-links
  */
 
-import dynamicLinks, {
-  FirebaseDynamicLinksTypes,
-} from '@react-native-firebase/dynamic-links';
 import { LinkingOptions } from '@react-navigation/native';
+import { Linking } from 'react-native';
 
 import { RootTabParamList } from '../types';
-
-type DynamicLink = FirebaseDynamicLinksTypes.DynamicLink;
 
 const linking: LinkingOptions<RootTabParamList> = {
   prefixes: ['https://kalalau.page.link'],
   async getInitialURL() {
-    const dynamicLinkUrl = await dynamicLinks().getInitialLink();
-    if (dynamicLinkUrl) {
-      return dynamicLinkUrl.url;
+    const url = await Linking.getInitialURL();
+    if (url) {
+      return url;
     }
-    return 'https://kalalau.page.link/writenfc';
+    return 'https://kalalau.page.link';
   },
   subscribe(listener) {
-    const handleDynamicLink = (link: DynamicLink) => {
-      listener(link.url);
+    const onReceiveUrl = ({ url }: { url: string }) => {
+      listener(url);
     };
-    return dynamicLinks().onLink(handleDynamicLink);
+    const unsubscribeFromLinking = Linking.addEventListener(
+      'url',
+      onReceiveUrl
+    );
+    const cleanUpSubscriptions = () => unsubscribeFromLinking.remove();
+    return cleanUpSubscriptions;
   },
   config: {
     screens: {
