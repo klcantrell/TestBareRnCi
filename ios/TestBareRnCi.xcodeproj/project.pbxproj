@@ -574,8 +574,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TestBareRnCi/TestBareRnCi.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = BMJG6U6BC7;
 				ENABLE_BITCODE = NO;
@@ -589,9 +589,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kal.TestBareRnCi.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kal.TestBareRnCi;
 				PRODUCT_NAME = TestBareRnCi;
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = TestBareRnCiProfile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -944,8 +944,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = TestBareRnCi/TestBareRnCi.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 23;
 				DEVELOPMENT_TEAM = BMJG6U6BC7;
 				INFOPLIST_FILE = TestBareRnCi/Info.plist;
@@ -958,9 +958,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.kal.TestBareRnCi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kal.TestBareRnCi.dev;
 				PRODUCT_NAME = TestBareRnCi;
-				PROVISIONING_PROFILE_SPECIFIER = TestBareRnCiProfile;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
