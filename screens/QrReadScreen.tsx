@@ -17,7 +17,9 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useFocusEffect } from '@react-navigation/native';
 import { RootTabScreenProps } from '../types';
 
-export default function QrReadScreen(_props: RootTabScreenProps<'ReadQr'>) {
+export default function QrReadScreen({
+  navigation,
+}: RootTabScreenProps<'ReadQr'>) {
   const [activate, setActivate] = useState(false);
   const [cameraPermission, requestCameraPermissions] =
     BarCodeScanner.usePermissions();
@@ -28,11 +30,11 @@ export default function QrReadScreen(_props: RootTabScreenProps<'ReadQr'>) {
   const handleBarCodeScanned: BarCodeScannedCallback = async ({ data }) => {
     setDataScanned(true);
     if (
-      data.startsWith('kalalau.page.link') &&
+      data.startsWith('https://kalalau.page.link/writenfc') &&
       (await Linking.canOpenURL(data))
     ) {
       Vibration.vibrate();
-      await Linking.openURL(data);
+      navigation.jumpTo('WriteNfc');
     } else {
       setDataScanned(false);
     }

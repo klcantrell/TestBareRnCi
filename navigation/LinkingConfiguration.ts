@@ -10,7 +10,7 @@ import { Linking } from 'react-native';
 import { RootTabParamList } from '../types';
 
 const linking: LinkingOptions<RootTabParamList> = {
-  prefixes: ['https://kalalau.page.link'],
+  prefixes: ['https://kalalau.page.link', 'testbarernci://'],
   async getInitialURL() {
     const url = await Linking.getInitialURL();
     if (url) {
